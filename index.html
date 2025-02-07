@@ -6,9 +6,9 @@
     <title>Rose Day Animation</title>
     <style>
         body {
-            background-color: white;
+            background-color: rgb(255, 255, 255);
             text-align: center;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Georgia', sans-serif;
             overflow: hidden;
         }
         .container {
@@ -37,10 +37,10 @@
             width: 50px;
             animation: moveRose 5s linear forwards;
         }
-        .floating-rose {
+        .falling-rose {
             position: absolute;
             width: 30px;
-            animation: floatingRoses 5s linear infinite;
+            animation: fallingRoses 5s linear infinite;
         }
         .boy {
             position: absolute;
@@ -69,9 +69,9 @@
             50% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(1); opacity: 0; }
         }
-        @keyframes floatingRoses {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        @keyframes fallingRoses {
+            0% { transform: translateY(0) scale(0.5); opacity: 1; }
+            100% { transform: translateY(100vh) scale(1.5); opacity: 0; }
         }
         .hearts-container {
             position: absolute;
@@ -79,22 +79,12 @@
             height: 100%;
             pointer-events: none;
         }
-        .heart-animation {
-            position: absolute;
-            font-size: 20px;
-            color: gold;
-            animation: floatingHearts 3s linear infinite;
-        }
-        @keyframes floatingHearts {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-        #play-music {
+        #music-button {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: red;
+            background-color: rgb(11, 48, 48);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -118,14 +108,14 @@
 
     <div class="hearts-container"></div>
 
-    <button id="play-music">🎵 Play Music</button>
+    <button id="music-button"> You are the most precious for me ❤️ </button>
     <audio id="background-music" autoplay loop>
-        <source src="https://drive.google.com/file/d/1sY-QWGAo9xQmTsb_blPKVP81082OcMWn/view?usp=sharing" type="audio/mpeg">
+        <source src="https://docs.google.com/uc?export=download&id=1cheFyMnYc-LhbVWApMkdWgCMBxf50VIw" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
     <script>
-        document.getElementById('Here is something for you 🌹').addEventListener('click', function() {
+        document.getElementById('music-button').addEventListener('click', function() {
             var music = document.getElementById('background-music');
             if (music.paused) {
                 music.play();
@@ -133,7 +123,19 @@
                 music.pause();
             }
         });
-    </script>
 
+        function createFallingRose() {
+            for (let i = 0; i < 5; i++) { // Increased quantity of roses
+            const rose = document.createElement("img");
+            rose.src = "https://th.bing.com/th/id/R.0b9a5b9c461ee2d3da8e87d6884fba24?rik=7Ul8R8PtYF8hfQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2frose-png-hd-rose-png-transparent-image-1140.png&ehk=V2lP0xRDrLllwbCdlwPIuiEAKMdYRd4k%2bhFV88WpR%2f0%3d&risl=&pid=ImgRaw&r=0";
+            rose.className = "falling-rose";
+            rose.style.left = Math.random() * window.innerWidth + "px";
+            rose.style.top = "-50px";
+            document.body.appendChild(rose);
+            setTimeout(() => rose.remove(), 5000);
+        }
+    }
+        setInterval(createFallingRose, 1000);
+    </script>
 </body>
 </html>
